@@ -1,0 +1,39 @@
+nimTitle	history	undo/history.html	module undo/history		0
+nim	ekSnapshot	undo/history.html#ekSnapshot	EntryKind.ekSnapshot		13
+nim	ekDiff	undo/history.html#ekDiff	EntryKind.ekDiff		13
+nim	ekJson	undo/history.html#ekJson	EntryKind.ekJson		13
+nim	ekJsonPatch	undo/history.html#ekJsonPatch	EntryKind.ekJsonPatch		13
+nim	EntryKind	undo/history.html#EntryKind	enum EntryKind		13
+nim	jpoAdd	undo/history.html#jpoAdd	JsonPatchOpKind.jpoAdd		19
+nim	jpoRemove	undo/history.html#jpoRemove	JsonPatchOpKind.jpoRemove		19
+nim	jpoReplace	undo/history.html#jpoReplace	JsonPatchOpKind.jpoReplace		19
+nim	JsonPatchOpKind	undo/history.html#JsonPatchOpKind	enum JsonPatchOpKind		19
+nim	JsonOp	undo/history.html#JsonOp	object JsonOp		24
+nim	HistoryEntry	undo/history.html#HistoryEntry	object HistoryEntry		31
+nim	HistoryContent	undo/history.html#HistoryContent	object HistoryContent		47
+nim	NowFn	undo/history.html#NowFn	type NowFn		63
+nim	HistoryManager	undo/history.html#HistoryManager	type HistoryManager		67
+nim	HistoryError	undo/history.html#HistoryError	object HistoryError		103
+nim	applyOps	undo/history.html#applyOps,JsonNode,seq[JsonOp]	proc applyOps(doc: JsonNode; ops: seq[JsonOp]): JsonNode		285
+nim	jsonDiff	undo/history.html#jsonDiff,JsonNode,JsonNode	proc jsonDiff(prevState, newState: JsonNode): tuple[fwd, bwd: seq[JsonOp]]		318
+nim	newHistoryManager	undo/history.html#newHistoryManager,string,string,int,int,int,int	proc newHistoryManager(path: string; historyId: string; maxVersions: int = 0;\n                  autoGroupMs: int = 0; autoGroupMax: int = 64;\n                  cacheCapacity: int = 1024): HistoryManager		387
+nim	newInMemoryHistoryManager	undo/history.html#newInMemoryHistoryManager,string,int,int,int	proc newInMemoryHistoryManager(historyId: string; maxVersions: int = 0;\n                          autoGroupMs: int = 0; autoGroupMax: int = 64): HistoryManager		418
+nim	setClock	undo/history.html#setClock,HistoryManager,NowFn	proc setClock(h: HistoryManager; fn: NowFn)		440
+nim	pushSnapshot	undo/history.html#pushSnapshot,HistoryManager,string	proc pushSnapshot(h: HistoryManager; content: string)		525
+nim	pushDiff	undo/history.html#pushDiff,HistoryManager,int,int,string	proc pushDiff(h: HistoryManager; offset, deletedLen: int; inserted: string)		529
+nim	pushJson	undo/history.html#pushJson,HistoryManager,JsonNode	proc pushJson(h: HistoryManager; data: JsonNode)		535
+nim	pushJsonDiff	undo/history.html#pushJsonDiff,HistoryManager,JsonNode,JsonNode	proc pushJsonDiff(h: HistoryManager; prevState, newState: JsonNode)		539
+nim	pushJsonPatch	undo/history.html#pushJsonPatch,HistoryManager,seq[JsonOp],seq[JsonOp]	proc pushJsonPatch(h: HistoryManager; ops, inverse: seq[JsonOp])		546
+nim	beginGroup	undo/history.html#beginGroup,HistoryManager	proc beginGroup(h: HistoryManager)		553
+nim	endGroup	undo/history.html#endGroup,HistoryManager	proc endGroup(h: HistoryManager)		563
+nim	canUndo	undo/history.html#canUndo,HistoryManager	proc canUndo(h: HistoryManager): bool		604
+nim	canRedo	undo/history.html#canRedo,HistoryManager	proc canRedo(h: HistoryManager): bool		608
+nim	peekUndo	undo/history.html#peekUndo,HistoryManager	proc peekUndo(h: HistoryManager): Option[HistoryContent]		632
+nim	peekRedo	undo/history.html#peekRedo,HistoryManager	proc peekRedo(h: HistoryManager): Option[HistoryContent]		646
+nim	undo	undo/history.html#undo,HistoryManager	proc undo(h: HistoryManager): Option[HistoryContent]		653
+nim	redo	undo/history.html#redo,HistoryManager	proc redo(h: HistoryManager): Option[HistoryContent]		671
+nim	undoText	undo/history.html#undoText,HistoryManager	proc undoText(h: HistoryManager): Option[string]		683
+nim	undoJson	undo/history.html#undoJson,HistoryManager	proc undoJson(h: HistoryManager): Option[JsonNode]		691
+nim	restoreTo	undo/history.html#restoreTo,HistoryManager,int	proc restoreTo(h: HistoryManager; pos: int)		701
+nim	compact	undo/history.html#compact,HistoryManager	proc compact(h: HistoryManager)		721
+nim	close	undo/history.html#close,HistoryManager	proc close(h: HistoryManager)		761
