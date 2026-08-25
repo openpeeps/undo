@@ -3,8 +3,9 @@ on:
   push:
     tags:
       - '*.*.*'
-    # branches:
-    #   - main
+    branches:
+      - main
+  workflow_dispatch:
 env:
   nim-version: 'stable'
   nim-src: src/${{ github.event.repository.name }}.nim
