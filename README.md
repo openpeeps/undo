@@ -13,7 +13,7 @@
 
 ## About
 
-`undo` is a persistent history manager for Nim applications. It records changes to text documents or structured (JSON) documents and lets higher level apps, such as text editors, design tools, or any stateful application, walk back and forth through their change history with `undo()` and `redo()`.
+`undo` is a persistent history manager for Nim applications. It records changes to text documents or structured (JSON) documents and lets higher level apps, such as text editors, UI design tools, or any stateful application, walk back and forth through their change history with `undo()` and `redo()`.
 
 Every entry is appended to a durable log powered by [boogie](https://github.com/openpeeps/boogie)'s `LogStore` (write-ahead log with group commits and crash recovery). Entries are serialized with Fast Binary Encoding ([openparser/fbe](https://github.com/openpeeps/openparser)), so histories survive application restarts.
 
@@ -23,7 +23,7 @@ Three kinds of entries are supported:
 |---|---|---|
 | Snapshot | Full document content | Small documents, checkpoints |
 | Diff | Offset, deleted length, inserted text | Large documents, keystroke-level tracking |
-| JSON | Full serialized JSON state | UI designers, structured editors |
+| JSON | Full serialized JSON state | UI design tools, structured editors |
 
 Multiple operations can be batched into a single undoable step with `beginGroup` / `endGroup`, which is handy for coalescing bursts of typing or multi-object edits into one history step.
 
@@ -83,7 +83,7 @@ echo c.get().diffInserted        # "hello"
 
 ### JSON documents
 
-For structured apps (UI designers, diagram tools), record full JSON states:
+For structured apps (UI design tools, diagram tools), record full JSON states:
 
 ```nim
 h.pushJson(%*{"type": "rect", "x": 10, "y": 20})
